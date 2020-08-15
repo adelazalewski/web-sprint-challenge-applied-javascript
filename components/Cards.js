@@ -20,3 +20,70 @@
 // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
+
+// data object - articles object - key:value pairs - value is an array of objects
+
+axios
+ .get(`https://lambda-times-api.herokuapp.com/articles`)
+ .then((res) => {
+     console.log('this was successful, here is your data: ', res);
+     //console.log(res.data.articles);
+     let data = res.data.articles;
+     console.log(data);
+     let bootstrap = data.bootstrap;
+     let javascript = data.javascript;
+     let technology = data.technology;
+     let jquery = data.jquery;
+     let node = data.node;
+     console.log(node);
+     node.forEach((el) => {
+         cardsEntryPoint.appendChild(cardMaker(el));
+     });
+     javascript.forEach((el) => {
+        cardsEntryPoint.appendChild(cardMaker(el));
+    });
+    bootstrap.forEach((el) => {
+        cardsEntryPoint.appendChild(cardMaker(el));
+    });
+    technology.forEach((el) => {
+        cardsEntryPoint.appendChild(cardMaker(el));
+    });
+    jquery.forEach((el) => {
+        cardsEntryPoint.appendChild(cardMaker(el));
+    });
+     //console.log(data.bootstrap[0].authorName);
+     
+ })
+ .catch((err) => {
+     console.log('Your request didnt go through: ', err);
+ });
+
+
+ function cardMaker(object) {
+     const divCard = document.createElement('div');
+     const headlineDiv = document.createElement('div');
+     const authorDiv = document.createElement('div');
+     const imgDiv = document.createElement('div');
+     const img = document.createElement('img');
+     const span = document.createElement('span');
+
+     divCard.classList.add('card');
+     headlineDiv.classList.add('headline');
+     authorDiv.classList.add('author');
+     imgDiv.classList.add('img-container');
+
+     
+     img.src = object.authorPhoto;
+     span.textContent = `By ${object.authorName}`;
+     divCard.appendChild(headlineDiv);
+     divCard.appendChild(authorDiv);
+     authorDiv.appendChild(imgDiv);
+     authorDiv.appendChild(img);
+     authorDiv.appendChild(span);
+
+     divCard.addEventListener('click', (event) => {
+        headlineDiv.textContent = object.headline;
+     })
+     return divCard;
+ };
+ const cardsEntryPoint = document.querySelector('.cards-container');
