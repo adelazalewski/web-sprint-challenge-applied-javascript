@@ -72,17 +72,17 @@ axios
      authorDiv.classList.add('author');
      imgDiv.classList.add('img-container');
 
-     
+     headlineDiv.textContent = object.headline;
      img.src = object.authorPhoto;
      span.textContent = `By ${object.authorName}`;
      divCard.appendChild(headlineDiv);
      divCard.appendChild(authorDiv);
      authorDiv.appendChild(imgDiv);
-     authorDiv.appendChild(img);
+     imgDiv.appendChild(img);
      authorDiv.appendChild(span);
 
      divCard.addEventListener('click', (event) => {
-        headlineDiv.textContent = object.headline;
+        console.log(headlineDiv.textContent = object.headline);
      })
      return divCard;
  };
