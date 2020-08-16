@@ -83,7 +83,7 @@ axios
 
      divCard.addEventListener('click', (event) => {
         console.log(headlineDiv.textContent = object.headline);
-     })
+     });
      return divCard;
  };
  const cardsEntryPoint = document.querySelector('.cards-container');
